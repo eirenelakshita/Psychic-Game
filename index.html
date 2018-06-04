@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script
+        src="https://code.jquery.com/jquery-3.3.1.slim.js"
+        integrity="sha256-fNXJFIlca05BIO2Y5zh1xrShK3ME+/lYZ0j+ChxX2DA="
+        crossorigin="anonymous"></script>
+</head>
+<body>
+<!-- make divs where the game will reside -->
+    <div id="game">
+    <p>Guess what letter I'm thinking of</p>
+    <p>Wins: 0</p>
+    <p>Losses: 0</p>
+    <p>Guesses left: 9</p>
+    <p>Your guess so far: </p>
+    </div>
+    <script type="text/javascript">
+
+//define variables
+    var wins = 0;
+    var losses = 0;
+    var guessesLeft = 9;
+    var computerChoices = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "_"];
+
+    var guessList = [];
+
+    document.onkeyup = function(event) {
+
+    var userGuess = event.key;
+    var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+
+    function newGame() {
+        guessList = [];
+        guessesLeft = 9;
+    }
+
+    if (userGuess === computerGuess) {
+        wins++;
+    } else {
+        guessList.push(userGuess);
+        guessesLeft--;
+        if (guessesLeft == 0) {
+        losses++;
+        alert("Game over!");
+        newGame(guessList);
+    }
+    };
+
+    var html = 
+        "<p>Guess what letter I'm thinking of</p>" +
+        "<p>Wins: " + wins + "</p>" +
+        "<p>Losses: " + losses + "</p>" +
+        "<p>Guesses left: " + guessesLeft + "</p>" +
+        "<p>Your guess so far: " + guessList + "</p>";
+      
+        document.querySelector("#game").innerHTML = html;
+
+};
+
+</script>
+</body>
+</html>
